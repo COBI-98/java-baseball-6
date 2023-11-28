@@ -25,7 +25,7 @@ class PlayerTest {
 
     @DisplayName("플레이어는 유효한 수(3자리의 수)의 범위를 입력해야한다.")
     @ParameterizedTest
-    @ValueSource(strings = {"1","12","1234"})
+    @ValueSource(strings = {"1","12","1234"," ",""})
     void setPlayerNumberLengthCorrect(String playerNumber) throws Exception{
         //given parameter
 
