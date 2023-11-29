@@ -6,7 +6,6 @@ import java.util.stream.IntStream;
 
 public class Player {
     private PlayerNumber playerNumber;
-    private int retryNumber;
     private PlayerStatus playerStatus;
 
     public Player() {
@@ -16,18 +15,6 @@ public class Player {
     public Player(String playerNumber) {
         this.playerNumber = new PlayerNumber(playerNumber);
         this.playerStatus = PlayerStatus.PROCEEDING;
-    }
-
-    public Player(int retryNumber) {
-        this.retryNumber = retryNumber;
-    }
-
-    public void setRetryNumber(int retryNumber) {
-        this.retryNumber = retryNumber;
-    }
-
-    public int getRetryNumber() {
-        return retryNumber;
     }
 
     public String getPlayerNumber() {
