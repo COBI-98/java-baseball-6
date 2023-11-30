@@ -10,27 +10,33 @@ public class PlayerHintUtil {
     private static final String SPACING = " ";
     private static final int BALL_INDEX = 0;
     private static final int STRIKE_INDEX = 1;
+    private static final int THREE = 3;
 
     private static String playerHint;
 
-    public void ballAndStrikeResultHint(List<Integer> ballAndStrikeCount) {
+    public PlayerHintUtil(List<Integer> ballAndStrikeCount) {
+        this.playerHint = ballAndStrikeResultHint(ballAndStrikeCount);
+    }
+
+    public String ballAndStrikeResultHint(List<Integer> ballAndStrikeCount) {
         int ballCount = ballAndStrikeCount.get(BALL_INDEX);
         int strikeCount = ballAndStrikeCount.get(STRIKE_INDEX);
 
         if (ballCount == 0 && strikeCount == 0) {
-            this.playerHint = NOT_THING;
-            return;
+            return NOT_THING;
         }
         if (ballCount == 0 && strikeCount != 0) {
-            this.playerHint = strikeCount + STRIKE;
-            return;
+            return strikeCount + STRIKE;
         }
         if (ballCount != 0 && strikeCount == 0) {
-            this.playerHint = ballCount + BALL;
-            return;
+            return ballCount + BALL;
         }
 
-        this.playerHint = ballCount + BALL + SPACING + strikeCount + STRIKE;
+        return ballCount + BALL + SPACING + strikeCount + STRIKE;
+    }
+
+    public boolean hasHintCorrectAnswer(){
+        return playerHint.equals(THREE + STRIKE);
     }
 
     public static String getPlayerHint() {

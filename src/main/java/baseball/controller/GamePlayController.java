@@ -11,12 +11,7 @@ import java.util.List;
 
 public class GamePlayController {
 
-    private static final int STRIKE_INDEX = 1;
-    private static final int THREE_STRIKE = 3;
-    private static final String STRIKE = "스트라이크";
-
     private static Computer computer;
-    private final PlayerHintUtil playerHintUtil = new PlayerHintUtil();
     private final OutputView outputView = new OutputView();
 
     public GamePlayController() {
@@ -35,25 +30,20 @@ public class GamePlayController {
 
     private void play(){
         Player player = inputPlayerNumber();
-        boolean gameStatus = hintResult(computer.calculateBallAndStrikeCount(player));
+        List<Integer> ballAndStrikeCount = computer.calculateBallAndStrikeCount(player);
+        PlayerHintUtil playerHint = new PlayerHintUtil(ballAndStrikeCount);
 
-        if (gameStatus){
-            outputView.printThreeStrikeResult(THREE_STRIKE);
+        if (playerHint.hasHintCorrectAnswer()){
+            outputView.printThreeStrikeResult(playerHint.getPlayerHint());
             return;
         }
 
-        outputView.printNotThreeStrikeResult(playerHintUtil.getPlayerHint());
+        outputView.printNotThreeStrikeResult(playerHint.getPlayerHint());
         play();
     }
 
     private static Player inputPlayerNumber() {
         return new Player(InputView.inputPlayerNumber());
-    }
-
-    public boolean hintResult(List<Integer> ballAndStrikeCountList) {
-        playerHintUtil.ballAndStrikeResultHint(ballAndStrikeCountList);
-
-        return ballAndStrikeCountList.get(STRIKE_INDEX) == THREE_STRIKE;
     }
 
 }
