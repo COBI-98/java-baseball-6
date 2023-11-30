@@ -1,6 +1,7 @@
 package baseball.domain;
 
-import baseball.util.ComputerRandomGameNumber;
+import static baseball.message.ErrorMessages.INVALID_INPUT_RETRY_FORMAT;
+
 import java.util.Arrays;
 
 public enum GameStatus {
@@ -17,7 +18,7 @@ public enum GameStatus {
         return Arrays.stream(GameStatus.values())
                 .filter(game -> game.hasGameCode(retryCode))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요"));
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_INPUT_RETRY_FORMAT.getMessage()));
     }
 
     private boolean hasGameCode(int retryCode) {
