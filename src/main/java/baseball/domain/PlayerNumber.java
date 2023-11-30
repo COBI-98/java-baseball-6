@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 
 public record PlayerNumber(String number) {
 
+    private static int MAX_NUMBER_COUNT = 3;
     public PlayerNumber {
         validateRangeFromNumber(number);
         validateCharacterFromNumber(number);
@@ -14,8 +15,8 @@ public record PlayerNumber(String number) {
     }
 
     public static void validateRangeFromNumber(String word) {
-        if (word.length() != 3) {
             throw new IllegalArgumentException("잘못된 값을 입력하셨습니다.(입력값 3자리수)");
+        if (word.length() != MAX_NUMBER_COUNT) {
         }
     }
 
