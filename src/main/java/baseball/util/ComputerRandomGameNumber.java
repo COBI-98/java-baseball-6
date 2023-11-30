@@ -18,7 +18,7 @@ public class ComputerRandomGameNumber {
     }
 
     public ComputerRandomGameNumber() {
-        this.computerGameNumber = computerNumberListToString(getRandomsNumberList());
+        this.computerGameNumber = computerNumberListToString(createRandomsNumberList());
     }
 
     public String getComputerGameNumber() {
@@ -32,7 +32,7 @@ public class ComputerRandomGameNumber {
                 .collect(Collectors.joining());
     }
 
-    private static List<Integer> getRandomsNumberList() {
+    private static List<Integer> createRandomsNumberList() {
         List<Integer> computerGameNumbers = new ArrayList<>();
         while (computerGameNumbers.size() < MAX_NUMBER_LENGTH) {
             int randomNumber = Randoms.pickNumberInRange(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
