@@ -27,14 +27,13 @@ public class GamePlayController {
         outputView.printCreateController();
     }
 
-
-    public void gameInit() {
+    public void startGame() {
         GameStatus gameStatus;
         player = new Player();
         do {
             computer = new Computer(new ComputerRandomGameNumber());
             play();
-            gameStatus = GameStatus.findByGameCode(InputView.setRetryNumber());
+            gameStatus = GameStatus.findByGameCode(InputView.inputRetryNumber());
         }while(gameStatus != GameStatus.FINISH);
 
     }
@@ -54,7 +53,7 @@ public class GamePlayController {
     }
 
     private static void inputPlayerNumber() {
-        player = new Player(InputView.setPlayerNumber());
+        player = new Player(InputView.inputPlayerNumber());
     }
 
     public List<Integer> calculateBallAndStrikeCount(String computerNumber, String playerNumber) {
