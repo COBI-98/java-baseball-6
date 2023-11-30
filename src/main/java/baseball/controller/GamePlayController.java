@@ -1,10 +1,9 @@
 package baseball.controller;
 
 import baseball.domain.Computer;
+import baseball.domain.GameStatus;
 import baseball.domain.Player;
-import baseball.domain.PlayerStatus;
 import baseball.service.GameNumberValidateService;
-import baseball.service.GameRetryService;
 import baseball.util.ComputerRandomGameNumber;
 import baseball.util.PlayerHintUtil;
 import baseball.view.InputView;
@@ -21,7 +20,6 @@ public class GamePlayController {
     private static Player player;
 
     private final GameNumberValidateService gameNumberValidateService = new GameNumberValidateService();
-    private final GameRetryService gameRetryService = new GameRetryService();
     private final PlayerHintUtil playerHintUtil = new PlayerHintUtil();
     private final OutputView outputView = new OutputView();
 
@@ -29,16 +27,30 @@ public class GamePlayController {
         outputView.printCreateController();
     }
 
-    public void gameStart() {
-        computer = new Computer(new ComputerRandomGameNumber());
-        player = new Player();
 
-        while (player.getPlayerStatus() != PlayerStatus.END) {
-            inputPlayerNumber();
-            hintResult(calculateBallAndStrikeCount(
-                    computer.getComputerGameNumber(), player.getPlayerNumber()));
-            isThreeStrikeGameExit();
+    public void gameInit() {
+        GameStatus gameStatus;
+        player = new Player();
+        do {
+            computer = new Computer(new ComputerRandomGameNumber());
+            play();
+            gameStatus = GameStatus.findByGameCode(InputView.setRetryNumber());
+        }while(gameStatus != GameStatus.FINISH);
+
+    }
+
+    private void play(){
+        inputPlayerNumber();
+        boolean gameStatus = hintResult(calculateBallAndStrikeCount(
+                computer.getComputerGameNumber(), player.getPlayerNumber()));
+
+        if (gameStatus){
+            outputView.printThreeStrikeResult(THREE_STRIKE);
+            return;
         }
+
+        outputView.printNotThreeStrikeResult(playerHintUtil.getPlayerHint());
+        play();
     }
 
     private static void inputPlayerNumber() {
@@ -51,19 +63,10 @@ public class GamePlayController {
                 computerNumber, playerNumber);
     }
 
-    public void hintResult(List<Integer> ballAndStrikeCountList) {
+    public boolean hintResult(List<Integer> ballAndStrikeCountList) {
         playerHintUtil.ballAndStrikeResultHint(ballAndStrikeCountList);
 
-        if (ballAndStrikeCountList.get(STRIKE_INDEX) == THREE_STRIKE) {
-            outputView.printThreeStrikeResult(THREE_STRIKE);
-            return;
-        }
-        outputView.printNotThreeStrikeResult(playerHintUtil.getPlayerHint());
+        return ballAndStrikeCountList.get(STRIKE_INDEX) == THREE_STRIKE;
     }
 
-    private void isThreeStrikeGameExit() {
-        if (PlayerHintUtil.getPlayerHint().equals(THREE_STRIKE + STRIKE)) {
-            gameRetryService.processNextGameStatus(computer, player);
-        }
-    }
 }

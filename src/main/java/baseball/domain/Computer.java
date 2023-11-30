@@ -16,8 +16,5 @@ public class Computer {
     public String getComputerGameNumber() {
         return computerGameNumber;
     }
-
-    public void setComputerGameNumber(String computerGameNumber) {
-        this.computerGameNumber = computerGameNumber;
-    }
+    
 }
