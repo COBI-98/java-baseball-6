@@ -3,7 +3,6 @@ package baseball.controller;
 import baseball.domain.Computer;
 import baseball.domain.GameStatus;
 import baseball.domain.Player;
-import baseball.service.GameNumberValidateService;
 import baseball.util.ComputerRandomGameNumber;
 import baseball.util.PlayerHintUtil;
 import baseball.view.InputView;
@@ -17,9 +16,6 @@ public class GamePlayController {
     private static final String STRIKE = "스트라이크";
 
     private static Computer computer;
-    private static Player player;
-
-    private final GameNumberValidateService gameNumberValidateService = new GameNumberValidateService();
     private final PlayerHintUtil playerHintUtil = new PlayerHintUtil();
     private final OutputView outputView = new OutputView();
 
@@ -29,7 +25,6 @@ public class GamePlayController {
 
     public void startGame() {
         GameStatus gameStatus;
-        player = new Player();
         do {
             computer = new Computer(new ComputerRandomGameNumber());
             play();
@@ -39,9 +34,8 @@ public class GamePlayController {
     }
 
     private void play(){
-        inputPlayerNumber();
-        boolean gameStatus = hintResult(calculateBallAndStrikeCount(
-                computer.getComputerGameNumber(), player.getPlayerNumber()));
+        Player player = inputPlayerNumber();
+        boolean gameStatus = hintResult(computer.calculateBallAndStrikeCount(player));
 
         if (gameStatus){
             outputView.printThreeStrikeResult(THREE_STRIKE);
@@ -52,14 +46,8 @@ public class GamePlayController {
         play();
     }
 
-    private static void inputPlayerNumber() {
-        player = new Player(InputView.inputPlayerNumber());
-    }
-
-    public List<Integer> calculateBallAndStrikeCount(String computerNumber, String playerNumber) {
-
-        return gameNumberValidateService.calculateGameNumber(
-                computerNumber, playerNumber);
+    private static Player inputPlayerNumber() {
+        return new Player(InputView.inputPlayerNumber());
     }
 
     public boolean hintResult(List<Integer> ballAndStrikeCountList) {
