@@ -12,9 +12,12 @@ import java.util.List;
 public class GamePlayController {
 
     private static Computer computer;
-    private final OutputView outputView = new OutputView();
+    private final InputView inputView;
+    private final OutputView outputView;
 
     public GamePlayController() {
+        inputView = new InputView();
+        outputView = new OutputView();
         outputView.printCreateController();
     }
 
@@ -23,7 +26,7 @@ public class GamePlayController {
         do {
             computer = new Computer(new ComputerRandomGameNumber());
             play();
-            gameStatus = GameStatus.findByGameCode(InputView.inputRetryNumber());
+            gameStatus = GameStatus.findByGameCode(inputView.inputRetryNumber());
         }while(gameStatus != GameStatus.FINISH);
 
     }
@@ -42,8 +45,8 @@ public class GamePlayController {
         play();
     }
 
-    private static Player inputPlayerNumber() {
-        return new Player(InputView.inputPlayerNumber());
+    private Player inputPlayerNumber() {
+        return new Player(inputView.inputPlayerNumber());
     }
 
 }
