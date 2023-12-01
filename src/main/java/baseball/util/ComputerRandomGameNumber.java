@@ -7,11 +7,10 @@ import java.util.stream.Collectors;
 
 public class ComputerRandomGameNumber {
 
-    private String computerGameNumber;
     private static final int MIN_RANDOM_NUMBER = 1;
     private static final int MAX_RANDOM_NUMBER = 9;
     private static final int MAX_NUMBER_LENGTH = 3;
-
+    private String computerGameNumber;
 
     public ComputerRandomGameNumber(List<Integer> computerGameNumberList) {
         this.computerGameNumber = computerNumberListToString(computerGameNumberList);

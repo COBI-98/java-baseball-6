@@ -20,10 +20,6 @@ public class Computer {
         this.computerGameNumber = computerRandomGameNumber.getComputerGameNumber();
     }
 
-    public String getComputerGameNumber() {
-        return computerGameNumber;
-    }
-
 
     public Map<HintResult, Integer> calculateBallAndStrikeCount(Player player) {
         Map<HintResult, Integer> ballAndStrikeResultMap = new EnumMap<>(HintResult.class);
@@ -67,5 +63,9 @@ public class Computer {
 
     private boolean isStrikeCheck(char computerPlaceNumber, char playerPlaceNumber) {
         return computerPlaceNumber == playerPlaceNumber;
+    }
+
+    public String getComputerGameNumber() {
+        return computerGameNumber;
     }
 }

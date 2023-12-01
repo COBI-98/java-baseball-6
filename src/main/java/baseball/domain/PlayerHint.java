@@ -8,10 +8,8 @@ import java.util.Map;
 
 public class PlayerHint {
 
-
     private static final String SPACING = " ";
     private static final int THREE = 3;
-
     private static String playerHint;
 
     public PlayerHint(Map<HintResult, Integer> ballAndStrikeMap) {
