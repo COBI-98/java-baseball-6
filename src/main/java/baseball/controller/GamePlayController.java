@@ -2,12 +2,13 @@ package baseball.controller;
 
 import baseball.domain.Computer;
 import baseball.domain.GameStatus;
+import baseball.domain.HintResult;
 import baseball.domain.Player;
 import baseball.util.ComputerRandomGameNumber;
-import baseball.util.PlayerHintUtil;
+import baseball.domain.PlayerHint;
 import baseball.view.InputView;
 import baseball.view.OutputView;
-import java.util.List;
+import java.util.Map;
 
 public class GamePlayController {
 
@@ -33,8 +34,8 @@ public class GamePlayController {
 
     private void play(){
         Player player = inputPlayerNumber();
-        List<Integer> ballAndStrikeCount = computer.calculateBallAndStrikeCount(player);
-        PlayerHintUtil playerHint = new PlayerHintUtil(ballAndStrikeCount);
+        Map<HintResult, Integer> hintResultIntegerMap = computer.calculateBallAndStrikeCount(player);
+        PlayerHint playerHint = new PlayerHint(hintResultIntegerMap);
 
         if (playerHint.hasHintCorrectAnswer()){
             outputView.printThreeStrikeResult(playerHint.getPlayerHint());

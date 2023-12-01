@@ -24,4 +24,8 @@ public enum HintResult {
     private boolean hasTitle(String hintTitle) {
         return title.equals(hintTitle);
     }
+
+    public String getTitle() {
+        return title;
+    }
 }
