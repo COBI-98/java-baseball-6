@@ -3,7 +3,9 @@ package baseball.domain;
 import baseball.util.ComputerRandomGameNumber;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class Computer {
 
@@ -23,14 +25,14 @@ public class Computer {
     }
 
 
-    public List<Integer> calculateBallAndStrikeCount(Player player) {
-        List<Integer> ballAndStrikeCountList = new ArrayList<>();
+    public Map<HintResult, Integer> calculateBallAndStrikeCount(Player player) {
+        Map<HintResult, Integer> ballAndStrikeResultMap = new EnumMap<>(HintResult.class);
         int ballIndex = calculateBallCount(computerGameNumber, player.getPlayerNumber());
         int strikeIndex = calculateStrikeCount(computerGameNumber, player.getPlayerNumber());
-        ballAndStrikeCountList.add(ballIndex);
-        ballAndStrikeCountList.add(strikeIndex);
+        ballAndStrikeResultMap.put(HintResult.BALL, ballIndex);
+        ballAndStrikeResultMap.put(HintResult.STRIKE, strikeIndex);
 
-        return ballAndStrikeCountList;
+        return ballAndStrikeResultMap;
     }
 
     private int calculateBallCount(String computerNumber, String playerNumber) {
