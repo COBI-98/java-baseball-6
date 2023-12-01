@@ -4,8 +4,6 @@ import static baseball.message.ErrorMessages.INVALID_DUPLICATION_NUMBER;
 import static baseball.message.ErrorMessages.INVALID_NUMBER_FORMAT;
 import static baseball.message.ErrorMessages.INVALID_NUMBER_RANGE;
 
-import baseball.message.ErrorMessages;
-import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;

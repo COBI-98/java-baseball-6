@@ -1,10 +1,7 @@
 package baseball.domain;
 
 import baseball.util.ComputerRandomGameNumber;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 
 public class Computer {
@@ -34,7 +31,7 @@ public class Computer {
     private int calculateBallCount(String computerNumber, String playerNumber) {
         int ballCount = 0;
         for (int computerPlace = 0; computerPlace < NUMBER_LENGTH; computerPlace++) {
-            if (isBallCheck(computerNumber.charAt(computerPlace), computerPlace, playerNumber)){
+            if (isBallCheck(computerNumber.charAt(computerPlace), computerPlace, playerNumber)) {
                 ballCount++;
             }
         }

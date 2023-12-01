@@ -33,7 +33,7 @@ public class PlayerHint {
         return ballCount + BALL.getTitle() + SPACING + strikeCount + STRIKE.getTitle();
     }
 
-    public boolean hasHintCorrectAnswer(){
+    public boolean hasHintCorrectAnswer() {
         return playerHint.equals(THREE + STRIKE.getTitle());
     }
 

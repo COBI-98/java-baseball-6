@@ -1,7 +1,5 @@
 package baseball.domain;
 
-import java.util.Arrays;
-
 public enum HintResult {
     BALL("볼"),
     STRIKE("스트라이크"),

@@ -4,8 +4,8 @@ import baseball.domain.Computer;
 import baseball.domain.GameStatus;
 import baseball.domain.HintResult;
 import baseball.domain.Player;
-import baseball.util.ComputerRandomGameNumber;
 import baseball.domain.PlayerHint;
+import baseball.util.ComputerRandomGameNumber;
 import baseball.view.InputView;
 import baseball.view.OutputView;
 import java.util.Map;
@@ -28,16 +28,16 @@ public class GamePlayController {
             computer = new Computer(new ComputerRandomGameNumber());
             play();
             gameStatus = GameStatus.findByGameCode(inputView.inputRetryNumber());
-        }while(gameStatus != GameStatus.FINISH);
+        } while (gameStatus != GameStatus.FINISH);
 
     }
 
-    private void play(){
+    private void play() {
         Player player = inputPlayerNumber();
         Map<HintResult, Integer> hintResultIntegerMap = computer.calculateBallAndStrikeCount(player);
         PlayerHint playerHint = new PlayerHint(hintResultIntegerMap);
 
-        if (playerHint.hasHintCorrectAnswer()){
+        if (playerHint.hasHintCorrectAnswer()) {
             outputView.printThreeStrikeResult(playerHint.getPlayerHint());
             return;
         }

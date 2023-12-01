@@ -14,7 +14,7 @@ public enum GameStatus {
         this.codeOfGame = codeOfGame;
     }
 
-    public static GameStatus findByGameCode(int retryCode){
+    public static GameStatus findByGameCode(int retryCode) {
         return Arrays.stream(GameStatus.values())
                 .filter(game -> game.hasGameCode(retryCode))
                 .findFirst()
