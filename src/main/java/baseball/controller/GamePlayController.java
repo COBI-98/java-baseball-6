@@ -5,7 +5,8 @@ import baseball.domain.GameStatus;
 import baseball.domain.HintResult;
 import baseball.domain.Player;
 import baseball.domain.PlayerHint;
-import baseball.util.ComputerRandomGameNumber;
+import baseball.util.ComputerNumberMaker;
+import baseball.util.ComputerRandomNumberGenerator;
 import baseball.view.InputView;
 import baseball.view.OutputView;
 import java.util.Map;
@@ -25,7 +26,8 @@ public class GamePlayController {
     public void startGame() {
         GameStatus gameStatus;
         do {
-            computer = new Computer(new ComputerRandomGameNumber());
+            ComputerNumberMaker computerNumberMaker = new ComputerNumberMaker(new ComputerRandomNumberGenerator());
+            computer = new Computer(computerNumberMaker.makeComputerNumber());
             play();
             gameStatus = GameStatus.findByGameCode(inputView.inputRetryNumber());
         } while (gameStatus != GameStatus.FINISH);

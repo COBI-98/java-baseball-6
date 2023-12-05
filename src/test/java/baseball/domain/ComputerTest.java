@@ -2,7 +2,6 @@ package baseball.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import baseball.util.ComputerRandomGameNumber;
 import java.util.List;
 import java.util.Map;
 import org.assertj.core.api.Assertions;
@@ -18,7 +17,7 @@ class ComputerTest {
     @Test
     void computer_constructor_success() throws Exception {
         //given
-        Computer computer = new Computer(new ComputerRandomGameNumber(List.of(1, 2, 3)));
+        Computer computer = new Computer("123");
 
         //when //then
         assertThat(computer.getComputerGameNumber()).isEqualTo("123");
@@ -29,7 +28,7 @@ class ComputerTest {
     @CsvSource({"123,0", "456,0", "345,1", "314,2", "312,3"})
     void calculateBallAndStrikeCount_ball_success(String playerNumber, int ballCount) throws Exception {
         //given
-        Computer computer = new Computer(new ComputerRandomGameNumber(List.of(1, 2, 3)));
+        Computer computer = new Computer("123");
         Player player = new Player(playerNumber);
 
         //when
@@ -44,7 +43,7 @@ class ComputerTest {
     @CsvSource({"456,0", "453,1", "423,2", "123,3"})
     void calculateBallAndStrikeCount_strike_success(String playerNumber, int strikeCount) throws Exception {
         //given
-        Computer computer = new Computer(new ComputerRandomGameNumber(List.of(1, 2, 3)));
+        Computer computer = new Computer("123");
         Player player = new Player(playerNumber);
 
         //when

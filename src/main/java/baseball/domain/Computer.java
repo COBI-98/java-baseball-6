@@ -1,6 +1,5 @@
 package baseball.domain;
 
-import baseball.util.ComputerRandomGameNumber;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -13,8 +12,8 @@ public class Computer {
     public Computer() {
     }
 
-    public Computer(ComputerRandomGameNumber computerRandomGameNumber) {
-        this.computerGameNumber = computerRandomGameNumber.getComputerGameNumber();
+    public Computer(String computerGameNumber) {
+        this.computerGameNumber = computerGameNumber;
     }
 
 
